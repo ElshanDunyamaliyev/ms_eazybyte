@@ -111,6 +111,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <image>
+                        <name>elshandunyamaliyev/${project.artifactId}:v2</name>
+                    </image>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -119,16 +122,16 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>3.4.2</version>
-                <configuration>
-                    <to>
-                        <image>elshandunyamaliyev/${project.artifactId}:v1</image>
-                    </to>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.google.cloud.tools</groupId>-->
+<!--                <artifactId>jib-maven-plugin</artifactId>-->
+<!--                <version>3.4.2</version>-->
+<!--                <configuration>-->
+<!--                    <to>-->
+<!--                        <image>elshandunyamaliyev/${project.artifactId}:v2</image>-->
+<!--                    </to>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 
