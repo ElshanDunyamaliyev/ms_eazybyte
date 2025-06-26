@@ -1,6 +1,7 @@
 package dev.elshan.account.controller;
 
 import dev.elshan.account.constants.AccountsConstants;
+import dev.elshan.account.dto.AccountsContactInfoDto;
 import dev.elshan.account.dto.CustomerDto;
 import dev.elshan.account.dto.ErrorResponseDto;
 import dev.elshan.account.dto.ResponseDto;
@@ -14,6 +15,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +24,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="/api", produces = {MediaType.APPLICATION_JSON_VALUE})
-@AllArgsConstructor
 @Validated
+@RequiredArgsConstructor
 public class AccountsController {
-    private IAccountsService iAccountsService;
+    private final IAccountsService iAccountsService;
+    private final AccountsContactInfoDto accountsContactInfoDto;
+
+    @GetMapping("/accounts-contact-info")
+    public AccountsContactInfoDto getAccountsContactInfo() {
+        return accountsContactInfoDto;
+    }
 
     @Operation(
             summary = "Create Account REST API",

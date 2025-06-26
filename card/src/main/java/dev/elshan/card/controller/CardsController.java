@@ -2,6 +2,7 @@ package dev.elshan.card.controller;
 
 import dev.elshan.card.constants.CardsConstants;
 import dev.elshan.card.dto.CardsDto;
+import dev.elshan.card.dto.CardsInfoDto;
 import dev.elshan.card.dto.ErrorResponseDto;
 import dev.elshan.card.dto.ResponseDto;
 import dev.elshan.card.service.ICardsService;
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,11 +32,18 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Validated
 public class CardsController {
 
-    private ICardsService iCardsService;
+    private final ICardsService iCardsService;
+
+    private final CardsInfoDto cardsInfoDto;
+
+    @GetMapping("/cards-contact-info")
+    public CardsInfoDto getAccountsContactInfo() {
+        return cardsInfoDto;
+    }
 
     @Operation(
             summary = "Create Card REST API",

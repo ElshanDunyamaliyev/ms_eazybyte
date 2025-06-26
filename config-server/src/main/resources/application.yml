@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: "configserver"
+  profiles:
+#    active: native # works with classpath or file system
+    active: git
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+  cloud:
+    config:
+      server:
+#        native:  # works if we are working with classpath or file system
+#          search-locations: "/home/elshan/Documents/config"
+#          search-locations: "classpath:/config" // this approach is for saving inside config server project
+        git:
+          uri: "https://github.com/ElshanDunyamaliyev/ms_bank-config-server"
+          timeout: 5
+          force-pull: true
+          clone-on-start: true
+          default-label: main
+
+server:
+  port: 8071
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
