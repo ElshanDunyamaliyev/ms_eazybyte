@@ -14,6 +14,7 @@ import dev.elshan.account.exception.CustomerAlreadyExistsException;
 import dev.elshan.account.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.Random;
@@ -29,6 +30,7 @@ public class AccountsServiceImpl  implements IAccountsService {
      * @param customerDto - CustomerDto Object
      */
     @Override
+    @Transactional
     public void createAccount(CustomerDto customerDto) {
         Customer customer = CustomerMapper.mapToCustomer(customerDto, new Customer());
         Optional<Customer> optionalCustomer = customerRepository.findByMobileNumber(customerDto.getMobileNumber());
