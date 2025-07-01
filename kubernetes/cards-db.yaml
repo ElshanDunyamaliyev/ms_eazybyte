@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cards-postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cardsdb
+  template:
+    metadata:
+      labels:
+        app: cardsdb
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: postgres
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cardsdb
+spec:
+  selector:
+    app: cardsdb
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

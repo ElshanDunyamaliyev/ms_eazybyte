@@ -5,8 +5,8 @@ spring:
 #    active: native # works with classpath or file system
     active: git
   rabbitmq:
-    host: "localhost"
-    port: 5672
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
     username: "guest"
     password: "guest"
   cloud:
@@ -40,4 +40,7 @@ management:
     health:
       probes:
         enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 

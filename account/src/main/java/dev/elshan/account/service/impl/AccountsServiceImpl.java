@@ -13,6 +13,7 @@ import dev.elshan.account.service.IAccountsService;
 import dev.elshan.account.exception.CustomerAlreadyExistsException;
 import dev.elshan.account.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,6 +64,7 @@ public class AccountsServiceImpl  implements IAccountsService {
      */
     @Override
     public CustomerDto fetchAccount(String mobileNumber) {
+        CacheProperties.Caffeine caffeine = new CacheProperties.Caffeine();
         Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
                 () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
         );
